@@ -16,6 +16,8 @@ module.exports = function(Appuser) {
 
       if (!email) return reject('Invalid Email');
 
+      if (!contactNo) return reject('Invalid Contact Number');
+
       Appuser.find({where: {email: email}})
       .then(data => {
         if (data.length !== 0) {
@@ -95,10 +97,11 @@ module.exports = function(Appuser) {
     }],
   });
 
-  Appuser.updateUserDetails = (userId, name, email) => {
+  Appuser.updateUserDetails = (userId, name, email, contactNo) => {
     return new Promise((resolve, reject) => {
       let newName = name;
       let newEmail = email;
+      let newContactNo = newContactNo;
 
       Appuser.findById(userId)
       .then(data => {
@@ -107,6 +110,9 @@ module.exports = function(Appuser) {
         }
         if (email === '') {
           newEmail = data.email;
+        }
+        if (contactNo === '') {
+          newContactNo = data.contactNo;
         }
       });
       Appuser.updateAll(
@@ -143,6 +149,9 @@ module.exports = function(Appuser) {
     }, {
       arg: 'email',
       type: 'string',
+    }, {
+      arg: 'contactNo',
+      type: 'number',
     }],
     returns: [{
       arg: 'data',
