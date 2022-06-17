@@ -1,0 +1,29 @@
+{
+  "name": "Bank",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "appUser": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
